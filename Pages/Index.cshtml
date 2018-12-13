@@ -1,0 +1,56 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "ChatRoom";
+}
+
+<div role="dialog" tabindex="-1" class="modal fade">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Login</h4>
+            </div>
+
+            <div class="modal-body">
+                <p>Welcome dear user, please enter your name:</p>
+                <p class="text-danger" ng-show="userError==404">Unfortunately user wasn't found!</p>
+                <form ng-submit="login();" id="form1">
+                    <div class="input-group">
+                    <div class="input-group-addon"><span>Fullname</span></div><input type="text" class="form-control" ng-model="fullname" required /></div>
+                </form>
+            </div>
+
+            <div class="modal-footer"><input class="btn btn-primary" ng-disabled="!fullname" type="submit" form="form1" value="Login"/></div>
+        </div>
+    </div>
+</div>
+
+<!-- Start: Show Online List -->
+<div class="hidden-sm hidden-md hidden-lg show-online-list"><i class="glyphicon glyphicon-chevron-left"></i></div>
+<!-- End: Show Online List -->
+<!-- Start: Chat Container -->
+<div class="chat-container">
+    <!-- Start: ChatBox -->
+    <div class="message-container">
+        <ul class="list-group message-list">
+            <li class="list-group-item" ng-repeat="m in messages"><img class="img-circle" ng-src="/images/{{m.userid}}.png"><span class="name" ng-bind="users[m.userid]"><strong>Name</strong></span>
+                <p class="list-group-item-text" style="white-space: pre;" ng-bind="m.text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+            </li>
+        </ul>
+    </div>
+    <!-- End: ChatBox -->
+    <!-- Start: Type Container -->
+    <div class="type-container"><button class="btn btn-primary" type="button" ng-click="sendMessage()" ng-disabled="!userMessage"><i class="glyphicon glyphicon-send"></i></button><textarea placeholder="Write your message..." ng-model="userMessage"></textarea></div>
+    <!-- End: Type Container -->
+</div>
+<!-- End: Chat Container -->
+<!-- Start: Online Users List -->
+<div class="online-list">
+    <ul class="list-group chat-list">
+        <li class="list-group-item hidden-sm hidden-md hidden-lg" id="hide-list">
+            <p class="lead list-group-item-text text-center"><i class="glyphicon glyphicon-chevron-right"></i></p>
+        </li>
+        <li class="list-group-item" ng-repeat="(id,name) in users"><span>{{name}}</span><img class="img-circle" ng-src="/images/{{id}}.png"></li>
+    </ul>
+</div>
+<!-- End: Online Users List -->
