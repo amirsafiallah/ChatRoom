@@ -66,7 +66,7 @@ namespace chatroom.Models
             cmd.Parameters.Add(new MySqlParameter
             {
                 ParameterName = "@userid",
-                DbType = DbType.String,
+                DbType = DbType.Int32,
                 Value = userid,
             });
         }

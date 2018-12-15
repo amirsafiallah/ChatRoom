@@ -20,7 +20,7 @@ namespace chatroom.Controllers
             }
         }
 
-        // GET api/user/name/name
+        // GET api/user/name/amir
         [HttpGet("name/{name}")]
         public async Task<IActionResult> GetOne(string name)
         {
@@ -30,7 +30,7 @@ namespace chatroom.Controllers
                 var query = new UserQuery(db);
                 var result = await query.FindOneByNameAsync(name);
                 if (result == null)
-                return new NotFoundResult();
+                    return new NotFoundResult();
                 return new OkObjectResult(result);
             }
         }
